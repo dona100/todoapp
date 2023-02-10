@@ -46,6 +46,7 @@ class ToDoView(ViewSet):
             return Response(data=serializer.errors)
 
 class ToDoModelView(ModelViewSet):
+    # http_method_names=["get","post","put"]
     authentication_classes=[authentication.BasicAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     
@@ -59,6 +60,14 @@ class ToDoModelView(ModelViewSet):
             return Response(data=serializer.data)
         else:
             return Response(data=serializer.errors)
+    # def create(self, request, *args, **kwargs):
+    #     serializer=ToDoSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         ToDo.objects.create(**serializer.validated_data,user=request.user)
+    #         return Response(data=serializer.data)
+    #     else:
+    #         return Response(data=serializer.errors)
+    
 
 
     def get_queryset(self):
@@ -106,6 +115,6 @@ class UsersView(ModelViewSet):
     #         return Response(data=serializer.data)
     #     else:
     #         return Response(data=serializer.errors)
-    
+
 
 
